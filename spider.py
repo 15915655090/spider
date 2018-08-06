@@ -1,6 +1,6 @@
 import re
-
 from urllib import request
+
 
 class Spider():
 
@@ -39,10 +39,11 @@ class Spider():
 
             #将name和number拼成字典
             anchor = {'name':name,'number':number}
+            #append()在列表里添加元素的方法
             anchors.append(anchor)
         return anchors
 
-    #定义一个函数 ->数据精炼
+    #定义一个函数 -> 数据精炼
     def __refine(self,anchors):
         l = lambda anchor: {
             'name':anchor['name'][0].strip(),
@@ -52,6 +53,7 @@ class Spider():
 
     #排序的函数 key接受一个参数
     def __sort(self,anchors):
+        #reverse降序排列的函数（默认是false）
         snchors = sorted(anchors,key=self.__sort_seed,reverse=True)
         return anchors
 
@@ -62,14 +64,19 @@ class Spider():
         if '万' in anchor['number']:
             number *= 10000
         return number
-
+    
+    '''
     #展现数据
     def __show(self,anchors):
-        for rank in range(0,len(anchors)):
-            print('rank ' + str(rank + 1)
+        for anchor in anchors:
+            print(anchor['name'] + '--------' + anchor['number'])
+    '''
+    def __show(self,anchors):
+        for rank in range(0, len(anchors)):
+            print('rank  ' + str(rank + 1)
             + '  : ' + anchors[rank]['name']
             + '    ' + anchors[rank]['number'])
-
+    
     #调用私有方法,总控所有方法   主方法
     def go(self):
 
